@@ -18,6 +18,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
+builder.Services.AddLocalization(options =>
+  {
+      // DataAnnotation を使ったときのメッセージは SharedResource に集約する
+      options.ResourcesPath = "Shared";
+  });
 builder.Services.AddSingleton<ICart, Cart>();
 builder.Services.AddSingleton<ILanguageService, LanguageService>();
 builder.Services.AddTransient<IProductService, ProductService>();
@@ -62,7 +67,7 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-var supportedCultures = new[] { "en-GB", "en-US", "en", "fr-FR", "fr" };
+var supportedCultures = new[] { "en-GB", "en-US", "en", "fr-FR", "fr","es" };
 var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
     .AddSupportedCultures(supportedCultures.ToArray())
     .AddSupportedUICultures(supportedCultures);

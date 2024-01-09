@@ -40,14 +40,11 @@ namespace P3AddNewFunctionalityDotNetCore.Controllers
         [HttpPost]
         public IActionResult Create(ProductViewModel product)
         {
-              
-
-           
-
             if (ModelState.IsValid)//Si toutes les données saisies sont validées
             {
-                _productService.SaveProduct(product);//Enregistrer le produit
-                return RedirectToAction("Admin");//Retounrer a la page d'accueil
+               
+                _productService.SaveProduct(product);//Enregistrer le produit dans la base de données
+                return RedirectToAction("Admin");//Retourner a la page d'accueil
             }
             else
             {
